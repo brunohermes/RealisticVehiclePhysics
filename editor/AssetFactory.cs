@@ -2,29 +2,29 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections;
 
-class HermesToolBox : EditorWindow {
-	private int axlesCount = 2;
+class AssetFactory : EditorWindow {
+	private int axlesCount = 1;
 	private float mass = 1000;
-	private float axleStep = 2;
-	private float axleWidth = 2;
+	private float axleStep = 1.67f;
+	private float axleWidth = 0.95f;
 	private float axleShift = -0.5f;
 	private string vName;
 
  	
-	[MenuItem ("Hermes Toolbox/Vehicle Physics/New Vehicle")]
+	[MenuItem ("Asset Factory/Vehicle Physics/Generate")]
 	public static void  nVehicleWindow() {
-		EditorWindow.GetWindow(typeof(HermesToolBox));
+		EditorWindow.GetWindow(typeof(AssetFactory));
 	}
 
 	void OnGUI () {
 		vName = EditorGUILayout.TextField ("Vehicle Name: ", vName);
-		axlesCount = EditorGUILayout.IntSlider ("Number of Axles: ", axlesCount, 2, 10);
+		axlesCount = EditorGUILayout.IntSlider ("Number of Axles (2x Wheels each): ", axlesCount, 1, 10);
 		mass = EditorGUILayout.FloatField ("Mass (kg): ", mass);
-		axleStep = EditorGUILayout.FloatField ("Axle Step: ", axleStep);
-		axleWidth = EditorGUILayout.FloatField ("Axle Width: ", axleWidth);
+		axleStep = EditorGUILayout.FloatField ("Axle Step (Vehicle Length): ", axleStep);
+		axleWidth = EditorGUILayout.FloatField ("Axle Width (Vehicle Width): ", axleWidth);
 		axleShift = EditorGUILayout.FloatField ("Axle Shift (Height): ", axleShift);
 
-		if (GUILayout.Button("Set new Vehicle")) {
+		if (GUILayout.Button("Generate vehicle physics")) {
 			CreateCar ();
 		}
 	}
@@ -50,10 +50,8 @@ class HermesToolBox : EditorWindow {
 
 			leftWheel.AddComponent<WheelCollider> ();
 			rightWheel.AddComponent<WheelCollider> ();
-
 			leftWheel.transform.parent = root.transform;
 			rightWheel.transform.parent = root.transform;
-
 			leftWheel.transform.localPosition = new Vector3 (-axleWidth / 2, axleShift, firstOffset - axleStep * i);
 			rightWheel.transform.localPosition = new Vector3 (axleWidth / 2, axleShift, firstOffset - axleStep * i);
 		}
@@ -62,7 +60,7 @@ class HermesToolBox : EditorWindow {
 		root.AddComponent<Vehicle>();
 	}
 
-	[MenuItem("Hermes Toolbox/About")]
+	[MenuItem("Asset Factory/About")]
 	
 	static void About(MenuCommand command)
     {
