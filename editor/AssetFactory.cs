@@ -3,7 +3,7 @@ using UnityEditor;
 using System.Collections;
 
 class AssetFactory : EditorWindow {
-	private int axlesCount = 1;
+	private int axlesCount = 2;
 	private float mass = 1000;
 	private float axleStep = 1.67f;
 	private float axleWidth = 0.95f;

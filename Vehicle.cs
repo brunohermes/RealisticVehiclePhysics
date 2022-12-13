@@ -108,40 +108,7 @@ public class Vehicle : MonoBehaviour
 	public Material headlightOn, headlightOff; //Headlights On/Off Material Slot	
 	public bool headlights;	//Headlights Toggler
 	#endregion
-
-	#region Trailer
-	[Header("Trailer")]
-	[Space(15)]
-	public bool trailerAttached;
-	public Renderer trailerBrakeLamps;
-
-
-	#endregion
-
-	#region Speedometer
-	
-
-
-	#endregion
-
-
-	#region OnTriggerStay
-	void OnTriggerStay(Collider other){
-		if(other.tag == "Trailer"){
-			trailerAttached = true;
-			 
-		}
-	}
-	#endregion
-
-	#region OnTriggerExit
-	void OnTriggerExit(Collider other){
-		if(other.tag == "Trailer"){
-			trailerAttached = false;
-			 
-		} 
-	}
-	#endregion
+ 
 
 	#region Awake
 	void Awake(){
@@ -360,17 +327,12 @@ public class Vehicle : MonoBehaviour
 					wheel.brakeTorque = 850;
 					for(int i = 0; i < brakeLamps.Length; i++){
 					brakeLamps[i].material = brakeLightOn;
-						if(trailerAttached){
-						trailerBrakeLamps.material = brakeLightOn;
-						}
+						 
 					}
 				}else{
 					for(int i = 0; i < brakeLamps.Length; i++){
 						brakeLamps[i].material = brakeLightOff;
-						trailerBrakeLamps.material = brakeLightOff;
-						if(!trailerAttached){
-						trailerBrakeLamps.material = brakeLightOff;
-						}
+						 
 					}
 				}
 			}else{ 
@@ -392,12 +354,7 @@ public class Vehicle : MonoBehaviour
 			}
 			#endregion
 
-			#region TrailerAttachment
-			//Checks if trailer is attached, if not turn off lights
-			if(!trailerAttached){
-				trailerBrakeLamps.material = brakeLightOff;
-			}
-			#endregion
+			
 
 			#region WheelShapeUpdater 
 			//Updates Wheel Shape looks while moving
