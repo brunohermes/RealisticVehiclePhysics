@@ -7,8 +7,9 @@ using TMPro;
 
 public class Vehicle : MonoBehaviour
 {
-
- #region Engine Mechanics
+    private WheelCollider[] wheels;
+    
+    #region Engine Mechanics
 	//Engine Management
 	[Header("Engine - Management")]
 	[Space(15)]
