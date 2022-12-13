@@ -10,14 +10,7 @@ public class Vehicle : MonoBehaviour
     private WheelCollider[] wheels;
     
     #region Engine Mechanics
-	//Engine Management
-	[Header("Engine - Management")]
-	[Space(15)]
-	public bool engineOn;
-	[Space(5)]
-	[Header("_______________________________________________")]
-	[Space(15)]
-
+	 
 	[Header("Maneuverability and Brakes")]
 	[Space(15)]
 	public float steeringAngle = 30;
@@ -95,7 +88,7 @@ public class Vehicle : MonoBehaviour
 	#region Electric
 	[Header("\u2600" + "              Electric")]
 	[Space(15)]
-	public Renderer []reverseLamp;
+	
 	public Renderer []brakeLamps;
 	public Renderer []headlamps;
 	public GameObject headlightMesh;
@@ -337,19 +330,17 @@ public class Vehicle : MonoBehaviour
 				}
 			}else{ 
 				if(Input.GetAxis("Vertical") < 0){
-				for(int i = 0; i < reverseLamp.Length; i++){
+				 
 						var reverseSpeed = 30;
-						reverseLamp[i].material = reverseOn;
+						 
 						 
 						if(speedKh > reverseSpeed){
 							wheel.brakeTorque = 850;
 							speedKh = 30;
-						}
+						 
 					}
 				}else{
-					for(int i = 0; i < reverseLamp.Length; i++){
-						reverseLamp[i].material = reverseOff;
-					}
+					 
 				}
 			}
 			#endregion
