@@ -21,7 +21,7 @@ public class Suspension : MonoBehaviour
         foreach(WheelCollider wheelcol in GetComponentsInChildren<WheelCollider>()){
             JointSpring spring = wheelcol.suspensionSpring;
 
-            spring.spring = Mathf.Pow(Math.Sqrt(wheelcol.sprungMass) * naturalFrequency, 2);
+            spring.spring = Mathf.Pow(Mathf.Sqrt(wheelcol.sprungMass) * naturalFrequency, 2);
             spring.damper = 2 * dampingRatio * Mathf.Sqrt(spring.spring * wheelcol.sprungMass);
             wheelcol.suspensionSpring = spring;
             Vector3 wheelRelativeBody = transform.InverseTransformPoint(wheelcol.transform.position);
