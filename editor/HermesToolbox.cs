@@ -70,5 +70,5 @@ class HermesToolBox : EditorWindow {
 	}
 }
 class About : EditorWindow {
-	private string about = "Ver. 0.1a!";
+	// private string about = "Ver. 0.1a!";
 }
