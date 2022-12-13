@@ -6,13 +6,13 @@ using UnityEngine;
 public class Suspension : MonoBehaviour
 { 
     [Range(0,20)]
-    public float naturalFrequency = 10; // Natural Frequency of the springs.
+    public float naturalFrequency = 10; // (Natural Frequency of the spring) Tendência de oscilação natural, (frequencia ressonante).
 
     [Range(0, 3)]
-    public float dampingRatio = 0.5f;
+    public float dampingRatio = 0.5f; // Amortecimento
 
     [Range(-1, 1)]
-    public float forceShift = 0.03f;
+    public float forceShift = 0.03f; // Normal force shift
 
     public float allowSuspensionDistance = true;    
 
