@@ -12,9 +12,9 @@ public class Suspension : MonoBehaviour
     public float dampingRatio = 0.5f; // Amortecimento
 
     [Range(-1, 1)]
-    public float forceShift = 0.03f; // Normal force shift
+    public float forceShift = 0.03f; // Normal force shift relativa a primeira lei de newton
 
-    public float allowSuspensionDistance = true;    
+    public bool setSuspensionDistance = true;    
 
     void Update()
     {
