@@ -92,11 +92,18 @@ public class Vehicle : MonoBehaviour
 	public Renderer []brakeLamps;
 	public Renderer []headlamps;
 	public Renderer []reverselamps;
+	public Renderer []leftBlinkerLamps;
+	public Renderer []rightBlinkerLamps;
+
+	private bool leftBlinkerOn;
+	private bool rightBlinkerOn;
+
 	public GameObject headlightMesh;
 	/** Vehicle Lights **/
 	[Space(5)]
 	[Header("Material")]
 	[Space(5)]
+	public Material blinkerOn, blinkerOff;
 	public Material reverseOn, reverseOff;
 	public Material brakeLightOn, brakeLightOff;
 	public Material headlightOn, headlightOff; //Headlights On/Off Material Slot	
@@ -144,6 +151,23 @@ public class Vehicle : MonoBehaviour
 	public void Update()
 	{
 		
+		//Blinkers
+		//Left
+		if(Input.GetKeyDown("[")){
+				leftBlinkerOn = !leftBlinkerOn;
+			}
+
+		if(leftBlinkerOn){
+			for(int i = 0; i < leftBlinkerLamps.Length; i++){
+				leftBlinkerLamps[i].material = blinkerOn;
+			}
+		}else{
+			for(int i = 0; i < leftBlinkerLamps.Length; i++){
+				leftBlinkerLamps[i].material = blinkerOff;
+			}
+		}
+
+
 		//Headlights
 		if(Input.GetKeyDown(KeyCode.L) && headlights == false){
 			for(int i = 0; i < headlamps.Length; i++){
