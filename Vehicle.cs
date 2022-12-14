@@ -91,6 +91,7 @@ public class Vehicle : MonoBehaviour
 	
 	public Renderer []brakeLamps;
 	public Renderer []headlamps;
+	public Renderer []reverselamps;
 	public GameObject headlightMesh;
 	/** Vehicle Lights **/
 	[Space(5)]
@@ -160,8 +161,6 @@ public class Vehicle : MonoBehaviour
 		
 
 
-
-		
 		/** HANDBRAKE DETECTION AND PARTICLE SYSTEM **/
 		if(Input.GetKeyDown(KeyCode.Space) && handBrakeActive == false){
 			handBrakeActive = true;
@@ -177,7 +176,7 @@ public class Vehicle : MonoBehaviour
 
 
 		float angle = steeringAngle * Input.GetAxis("Horizontal");
-		float torque = maxTorque * Input.GetAxis("Vertical") / 2;
+		float torque = maxTorque * Input.GetAxis("Vertical") / 4;
 		float torqueT = maxTorque * Input.GetAxis("Vertical");
 		bool handbrake = handBrakeActive;
 
@@ -185,7 +184,7 @@ public class Vehicle : MonoBehaviour
 		foreach (WheelCollider wheel in wheels)
 		{
 			if(handbrake){
-				wheel.brakeTorque = 750;
+				wheel.brakeTorque = 2750;
 			}else{
 				wheel.brakeTorque = 0;
 			}
@@ -219,10 +218,16 @@ public class Vehicle : MonoBehaviour
 
 				speedKh = Mathf.Abs(fSpeed);
 				
-				if(rpmF < 25f){
-					reverseGear = true;
-				}else{ 
+				if(Input.GetKeyDown(KeyCode.LeftControl)){
+				 	reverseGear = true;
+					for(int i = 0; i < reverselamps.Length; i++){
+						reverselamps[i].material = reverseOn;
+					}
+				}else if(Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey("w")){ 
 					reverseGear = false;
+					for(int i = 0; i < reverselamps.Length; i++){
+						reverselamps[i].material = reverseOff;
+					}
 				}
 				
 				if(speedKh >= maxSpeed - 10 || speedKh > maxSpeed){
@@ -311,35 +316,41 @@ public class Vehicle : MonoBehaviour
 			#endregion
 
 			#region BrakeSystem and Reverse Actuator
+			
 			//Brake SYSTEM And Reverse Actuator
 			if(!reverseGear){
 				if(Input.GetAxis("Vertical") < 0){
-					wheel.brakeTorque = 850;
+					wheel.brakeTorque = 110;
 					for(int i = 0; i < brakeLamps.Length; i++){
-					brakeLamps[i].material = brakeLightOn;
-						 
+					brakeLamps[i].material = brakeLightOn; 
+
 					}
 				}else{
 					for(int i = 0; i < brakeLamps.Length; i++){
-						brakeLamps[i].material = brakeLightOff;
-						 
+					brakeLamps[i].material = brakeLightOff;
+
 					}
 				}
-			}else{ 
-				if(Input.GetAxis("Vertical") < 0){
-				 
-						var reverseSpeed = 30;
-						 
-						 
+			}else if(reverseGear){
+				var reverseSpeed = 30;
 						if(speedKh > reverseSpeed){
-							wheel.brakeTorque = 850;
+							wheel.brakeTorque = 5850;
 							speedKh = 30;
-						 
-					}
-				}else{
-					 
-				}
+						}
 			}
+
+			// if(reverseGear){
+			// 	else{ 
+			// 	if(reverseGear){
+						
+			// 		}
+			// 	}else{
+			// 		 for(int i = 0; i < reverselamps.Length; i++){
+			// 			reverselamps[i].material = reverseOff;
+			// 		 }
+			// }
+
+
 			#endregion
 
 			
@@ -356,6 +367,7 @@ public class Vehicle : MonoBehaviour
 				Transform shapeTransform = wheel.transform.GetChild (0);
 				shapeTransform.position = p;
 				shapeTransform.rotation = q;
+ 
 			}
 			#endregion
 
