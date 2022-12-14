@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class CameraBehaviour : MonoBehaviour
 {
-    public Transform target;
-    public float smoothSpeed = 0.125f;
-    public Vector3 offset;
+    [SerializeField] private Camera camera;
+    [SerializeField] private Transform target;
+    private Vector3 previousPosition;
 
-    void FixedUpdate(){
-        Vector3 desiredPos = target.position + offset;
-        Vector3 smoothedPos = Vector3.Lerp(transform.position, desiredPos, smoothSpeed);
-        transform.position = smoothedPos;
+    void Update(){
+     
+        previousPosition = camera.ScreenToViewportPoint(Input.mousePosition);
 
-        transform.LookAt(target);
+        if(Input.GetMouseButton(0)){
+            Vector3 direction = previousPosition - camera.ScreenToViewportPoint(Input.mousePosition);
+
+            camera.transform.position = target.position;
+
+        camera.transform.Rotate(new Vector3(1,0,0), direction.y * 180);
+        camera.transform.Rotate(new Vector3(0,1,0), -direction.x * 180, Space.World);
+        camera.transform.Translate(new Vector3(0,0,-10));
+        previousPosition = camera.ScreenToViewportPoint(Input.mousePosition);
+        
+        }
     }
 }
