@@ -103,7 +103,7 @@ public class Vehicle : MonoBehaviour
 	private IEnumerator coroutineBL;
 	private IEnumerator coroutineBR;
 
-	public GameObject headlightMesh;
+	public GameObject headlightsLights;
 	/** Vehicle Lights **/
 	[Space(5)]
 	[Header("Material")]
@@ -178,6 +178,11 @@ public class Vehicle : MonoBehaviour
 			headlights = false;
 		}
 		
+		if(headlights){
+			headlightsLights.SetActive(true);
+		}else{
+			headlightsLights.SetActive(false);
+		}
 
 
 		/** HANDBRAKE DETECTION AND PARTICLE SYSTEM **/
@@ -402,9 +407,6 @@ public class Vehicle : MonoBehaviour
 
 
 	}
-
-
-
 
 	IEnumerator leftBlinkerOnCoroutine(float waitTime){
 		leftBlinkerOnState();
