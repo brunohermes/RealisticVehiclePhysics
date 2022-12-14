@@ -114,6 +114,29 @@ public class Vehicle : MonoBehaviour
 	public Material headlightOn, headlightOff; //Headlights On/Off Material Slot	
 	public bool headlights;	//Headlights Toggler
 	#endregion
+
+
+
+
+	//TESTANDO SCRIPTS E IDEIAS
+
+
+	public GameObject disco;
+	public Quaternion discoRotationPos;
+	public Quaternion discoRotationNeg;
+	public Quaternion discoRotationRes;
+	public float angulo;
+	public float rotspeed;
+
+	public GameObject vehicle;
+
+
+
+
+
+
+
+	// AQUI ACABAM OS TESTES KKKK
  
 
 	#region Awake
@@ -127,6 +150,8 @@ public class Vehicle : MonoBehaviour
 	
 	public void Start()
 	{
+		 
+
 		//Wheel creation
 		wheels = GetComponentsInChildren<WheelCollider>();
 		
@@ -207,6 +232,9 @@ public class Vehicle : MonoBehaviour
 		#region General Wheel Collider Structure
 		foreach (WheelCollider wheel in wheels)
 		{
+			
+			
+
 			if(handbrake){
 				wheel.brakeTorque = 2750;
 			}else{
@@ -217,6 +245,14 @@ public class Vehicle : MonoBehaviour
 			/** STEERING AND 4X4 TRACTION SYSTEM **/
 			if (wheel.transform.localPosition.z > 0){
 				wheel.steerAngle = angle;
+				// print(wheel.steerAngle );
+				angulo = angle;
+				
+ 
+ 
+				
+				
+
 			if(tractionController.activeSelf){
 				wheel.motorTorque = torque;
 			} else{
@@ -382,6 +418,10 @@ public class Vehicle : MonoBehaviour
  
 			}
 			#endregion
+
+			 
+			disco.transform.localRotation = Quaternion.Euler(0f, angulo, 0f);
+ 
 
 		}
 		#endregion
