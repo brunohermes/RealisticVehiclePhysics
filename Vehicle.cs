@@ -159,28 +159,9 @@ public class Vehicle : MonoBehaviour
 	public void Update()
 	{
 		
-		// bDuration
-		// bCount
 		
 
-
-		//Blinkers
-		//Left
-		if(Input.GetKeyDown("[")){
-				leftBlinkerOn = !leftBlinkerOn;
-				coroutineBL = leftBlinkerAction(1f);
-        		StartCoroutine(coroutineBL);
-		}
-		//right
-		if(Input.GetKeyDown("]")){
-				rightBlinkerOn = !rightBlinkerOn;
-				coroutineBR = rightBlinkerAction(1f);
-        		StartCoroutine(coroutineBR);
-		}
-
-		if(!leftBlinkerOn || !rightBlinkerOn){
-			blinkerOffState();
-		} 
+	  
 		
 		//Headlights
 		if(Input.GetKeyDown(KeyCode.L) && headlights == false){
@@ -377,18 +358,6 @@ public class Vehicle : MonoBehaviour
 						}
 			}
 
-			// if(reverseGear){
-			// 	else{ 
-			// 	if(reverseGear){
-						
-			// 		}
-			// 	}else{
-			// 		 for(int i = 0; i < reverselamps.Length; i++){
-			// 			reverselamps[i].material = reverseOff;
-			// 		 }
-			// }
-
-
 			#endregion
 
 			
@@ -413,94 +382,64 @@ public class Vehicle : MonoBehaviour
 		#endregion
 
 
+		//Blinkers
+		//Left
+		if(Input.GetKeyDown("[")){
+			 leftBlinkerOn = !leftBlinkerOn;
+		}
+ 
+		//right
+		if(Input.GetKeyDown("]")){
+			  rightBlinkerOn = !rightBlinkerOn;
+		}
+
+		if(leftBlinkerOn){
+			coroutineBL = leftBlinkerOnCoroutine(1.2f);
+			StartCoroutine(coroutineBL);
+		}else{
+			
+		}
+
+
 	}
 
 
-	private IEnumerator leftBlinkerAction(float waitTime)
-		{
-			while (leftBlinkerOn)
-			{
-				yield return new WaitForSeconds(waitTime);
-				leftBlinker();
-				yield return StartCoroutine(leftBlinkerB(0.6f));
-			}
-		}
-
-	private IEnumerator leftBlinkerB(float waitTime)
-		{
-			while (leftBlinkerOn)
-			{
-				yield return new WaitForSeconds(waitTime);
-				blinkerOffState();
-				yield return StartCoroutine(leftBlinkerAction(0.6f));
-			}
-
-		}
-
-	private IEnumerator rightBlinkerAction(float waitTime)
-		{
-			while (true)
-			{
-				yield return new WaitForSeconds(waitTime);
-				rightBlinker();
-				yield return StartCoroutine(rightBlinkerB(0.6f));
-			}
-		}
-
-	private IEnumerator rightBlinkerB(float waitTime)
-		{
-			while (true)
-			{
-				yield return new WaitForSeconds(waitTime);
-				blinkerOffState();
-				yield return StartCoroutine(rightBlinkerAction(0.6f));
-			}
-
-		}
 
 
+	IEnumerator leftBlinkerOnCoroutine(float waitTime){
+		leftBlinkerOnState();
+		yield return new WaitForSeconds(1f);
+	 
+	}
+	 
 
-	private void leftBlinker(){
+ 
+
+	private void leftBlinkerOnState(){
 			for(int i = 0; i < leftBlinkerLamps.Length; i++){
 					leftBlinkerLamps[i].material = blinkerOn;
 					}
 	}
 
-	private void rightBlinker(){
+	private void rightBlinkerOnState(){
 			for(int i = 0; i < rightBlinkerLamps.Length; i++){
 				rightBlinkerLamps[i].material = blinkerOn;
 			}
 	}
 
-	private void blinkerOffState(){
+
+	private void leftBlinkerOffState(){
 
 		for(int i = 0; i < leftBlinkerLamps.Length; i++){
 				leftBlinkerLamps[i].material = blinkerOff;
 				}
+	}
+	private void rightBlinkerOffState(){
 
 		for(int i = 0; i < rightBlinkerLamps.Length; i++){
 				rightBlinkerLamps[i].material = blinkerOff;
 			}
 	}
 
-
-// for(int i = 0; i < leftBlinkerLamps.Length; i++){
-// 				leftBlinkerLamps[i].material = blinkerOff;
-// 				}
-
-	
  
-		
- 			 
-
-		
-
-
-		// }else{
-		// 	for(int i = 0; i < rightBlinkerLamps.Length; i++){
-		// 		rightBlinkerLamps[i].material = blinkerOff;
-		// 	}
-		// }
-
-	
 }
