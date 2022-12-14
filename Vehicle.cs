@@ -148,13 +148,13 @@ public class Vehicle : MonoBehaviour
 			for(int i = 0; i < headlamps.Length; i++){
 				headlamps[i].material = headlightOn;
 			}
-			headlightMesh.SetActive(true);
+		 
 			headlights = true;
 		}else if(Input.GetKeyDown(KeyCode.L) && headlights == true){
 			for(int i = 0; i < headlamps.Length; i++){
 				headlamps[i].material = headlightOff;
 			}
-			headlightMesh.SetActive(false);
+			 
 			headlights = false;
 		}
 		
@@ -213,11 +213,7 @@ public class Vehicle : MonoBehaviour
 				var realRpm = rpmF * multip;
 				var radius = 37;
 				var constkph = 0.001885;
-
-				// rpmG = rpmF;
-
-				// print("KM/H: " + realRpm * radius * constkph + "Wheel RPM: " + realRpm  );
-
+ 
 				var kph = realRpm * radius * constkph;
 				var fSpeed = Convert.ToInt32(kph);
 
@@ -303,6 +299,7 @@ public class Vehicle : MonoBehaviour
 						audioSource.pitch = pitchVal;
 					}
 				}
+
 			//Sets the max speed
 				if(speedKh < maxSpeed){
 					torqueT = maxTorque * Input.GetAxis("Vertical");
