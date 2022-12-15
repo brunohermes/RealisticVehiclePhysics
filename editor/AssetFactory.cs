@@ -18,7 +18,7 @@ class AssetFactory : EditorWindow {
 
 	void OnGUI () {
 		vName = EditorGUILayout.TextField ("Vehicle Name: ", vName);
-		axlesCount = EditorGUILayout.IntSlider ("Number of Axles (2x Wheels each): ", axlesCount, 1, 10);
+		axlesCount = EditorGUILayout.IntSlider ("Axles (2 Wheels each): ", axlesCount, 1, 10);
 		mass = EditorGUILayout.FloatField ("Mass (kg): ", mass);
 		axleStep = EditorGUILayout.FloatField ("Axle Step (Vehicle Length): ", axleStep);
 		axleWidth = EditorGUILayout.FloatField ("Axle Width (Vehicle Width): ", axleWidth);
@@ -36,6 +36,8 @@ class AssetFactory : EditorWindow {
 		rootBody.mass = mass;
 		
 		var body = GameObject.CreatePrimitive (PrimitiveType.Cube);
+		body.transform.position = new Vector3(0f, 0f, 0f);
+		body.transform.localScale = new Vector3(0.5f, 0.5f, 2.65f);
 		body.transform.parent = root.transform;
 
 		float length = (axlesCount - 1) * axleStep;
@@ -50,13 +52,17 @@ class AssetFactory : EditorWindow {
 
 			leftWheel.AddComponent<WheelCollider> ();
 			rightWheel.AddComponent<WheelCollider> ();
+			rightWheel.transform.localScale = new Vector3(0.1f, 0.7f, 0.5f);
+			leftWheel.transform.localScale = new Vector3(0.1f, 0.7f, 0.5f);
+
 			leftWheel.transform.parent = root.transform;
 			rightWheel.transform.parent = root.transform;
 			leftWheel.transform.localPosition = new Vector3 (-axleWidth / 2, axleShift, firstOffset - axleStep * i);
 			rightWheel.transform.localPosition = new Vector3 (axleWidth / 2, axleShift, firstOffset - axleStep * i);
 		}
-
+		
 		root.AddComponent<Suspension>();
+		// root.AddComponent<FuelSystem>();
 		root.AddComponent<Vehicle>();
 	}
 
