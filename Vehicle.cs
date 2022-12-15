@@ -18,8 +18,6 @@ public class Vehicle : MonoBehaviour
 	public float brakeTorque = 1200;
 	public GameObject handbrakeDection;
 	private bool handBrakeActive;
-	[Space(5)]
-	[Header("_______________________________________________")]
 	[Space(15)]
 	//Engine Performance Setup
 
@@ -29,8 +27,6 @@ public class Vehicle : MonoBehaviour
 	public float maxTorque = 750;
 	public int gearsNo;
 	public float []gearBox;
-	[Space(5)]
-	[Header("_______________________________________________")]
 	[Space(15)]
 
 	[Header("\u25EF" + "              Wheels")]
@@ -42,8 +38,6 @@ public class Vehicle : MonoBehaviour
 	private int speedKh;
 	//Transmission System
 	private bool reverseGear;
-	[Space(5)]
-	[Header("_______________________________________________")]
 	[Space(15)]
 	#endregion
 
@@ -68,8 +62,6 @@ public class Vehicle : MonoBehaviour
 	public ParticleSystem groundImpactParticles;
 	public GameObject groundBoundaries;
 
-	[Space(5)]
-	[Header("_______________________________________________")]
 	[Space(15)]
 	#endregion
 	
@@ -85,8 +77,7 @@ public class Vehicle : MonoBehaviour
 	private float secondGear = 1.36f;
 	private float thirdGear = 1.45f;
 	private float fourthGear = 1.56f;
-	[Space(5)]
-	[Header("_______________________________________________")]
+ 
 	[Space(15)]
 	#endregion
 
@@ -121,14 +112,9 @@ public class Vehicle : MonoBehaviour
 	public bool headlights;	//Headlights Toggler
 	#endregion
 
-
-
-
 	//TESTANDO SCRIPTS E IDEIAS
 
-
 	public GameObject discoEsq, discoDir;
- 
 	public float angulo;
  
 
