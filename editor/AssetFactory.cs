@@ -60,12 +60,12 @@ class AssetFactory : EditorWindow {
 		root.AddComponent<Vehicle>();
 	}
 
-	[MenuItem("Asset Factory/About")]
+	// [MenuItem("Asset Factory/About")]
 	
-	static void About(MenuCommand command)
-    {
-		EditorWindow.GetWindow(typeof(About));
-	}
+	// static void About(MenuCommand command)
+    // {
+	// 	EditorWindow.GetWindow(typeof(About));
+	// }
 }
 class About : EditorWindow {
 	// private string about = "Ver. 0.1a!";
