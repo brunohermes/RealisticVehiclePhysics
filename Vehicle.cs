@@ -146,19 +146,14 @@ public class Vehicle : MonoBehaviour
 		// groundBoundaries
 		
 
-
+	//Sistema de detecção de impacto inferior
 	private void OnTriggerEnter(Collider groundBoundaries){
 		if(groundBoundaries.gameObject.CompareTag("Level")){
 			groundImpactParticles.Play();
 		}
-
-
 	}
 
-
-
-
-
+ 
 
 	#region Awake
 	void Awake(){
