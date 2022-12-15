@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System;
 using UnityEngine.UI;
 using TMPro;
@@ -63,6 +64,10 @@ public class Vehicle : MonoBehaviour
 	//Particle System for trail and braking
 	public ParticleSystem[] handbrakeParticles;
 	public ParticleSystem[] movementParticles;
+
+	public ParticleSystem groundImpactParticles;
+	public GameObject groundBoundaries;
+
 	[Space(5)]
 	[Header("_______________________________________________")]
 	[Space(15)]
@@ -94,6 +99,7 @@ public class Vehicle : MonoBehaviour
 	public Renderer []reverselamps;
 	public Renderer []leftBlinkerLamps;
 	public Renderer []rightBlinkerLamps;
+	 
 
 
 	private float bDuration, bCount;
@@ -121,15 +127,10 @@ public class Vehicle : MonoBehaviour
 	//TESTANDO SCRIPTS E IDEIAS
 
 
-	public GameObject disco;
-	public Quaternion discoRotationPos;
-	public Quaternion discoRotationNeg;
-	public Quaternion discoRotationRes;
+	public GameObject discoEsq, discoDir;
+ 
 	public float angulo;
-	public float rotspeed;
-
-	public GameObject vehicle;
-
+ 
 
 
 
@@ -139,6 +140,26 @@ public class Vehicle : MonoBehaviour
 	// AQUI ACABAM OS TESTES KKKK
  
 
+
+		
+		// groundImpactParticles
+		// groundBoundaries
+		
+
+
+	private void OnTriggerEnter(Collider groundBoundaries){
+		if(groundBoundaries.gameObject.CompareTag("Level")){
+			groundImpactParticles.Play();
+		}
+
+
+	}
+
+
+
+
+
+
 	#region Awake
 	void Awake(){
 		audioSource = GetComponent<AudioSource>();
@@ -147,10 +168,16 @@ public class Vehicle : MonoBehaviour
 	}
 	#endregion
 
+
 	
 	public void Start()
 	{
-		 
+		
+
+		
+		// groundImpactParticles
+		// groundBoundaries
+		
 
 		//Wheel creation
 		wheels = GetComponentsInChildren<WheelCollider>();
@@ -420,8 +447,9 @@ public class Vehicle : MonoBehaviour
 			#endregion
 
 			 
-			disco.transform.localRotation = Quaternion.Euler(0f, angulo, 0f);
- 
+			discoEsq.transform.localRotation = Quaternion.Euler(0f, angulo, 0f);
+			discoDir.transform.localRotation = Quaternion.Euler(0f, angulo, 0f);
+			// // disco.transform.localPosition = new Vector3 (transform.localPosition.x , transform.localPosition.y, transform.localPosition.z); 
 
 		}
 		#endregion
