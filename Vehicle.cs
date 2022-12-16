@@ -122,17 +122,9 @@ public class Vehicle : MonoBehaviour
 		
 	}
 	
-
-
-
-
-
-
 	
 	public void Update()
 	{
-		
-		
 
 		//4x4
 		if(Input.GetKeyDown(KeyCode.G)){
@@ -177,17 +169,14 @@ public class Vehicle : MonoBehaviour
 		}
 		
 
-
-
 		float angle = steeringAngle * Input.GetAxis("Horizontal");
 		float torque = maxTorque * Input.GetAxis("Vertical") / 4;
 		float torqueT = maxTorque * Input.GetAxis("Vertical");
 		bool handbrake = handBrakeActive;
 
-		#region General Wheel Collider Structure
+		
 		foreach (WheelCollider wheel in wheels)
 		{
-			
 			
 
 			if(handbrake){
@@ -212,7 +201,7 @@ public class Vehicle : MonoBehaviour
 			}
 				
 
-			#region Engine and Rpm
+			
 			if (wheel.transform.localPosition.z < 0){
 				
 				//RPM TO KMPH
@@ -324,10 +313,7 @@ public class Vehicle : MonoBehaviour
 				}
 				wheel.motorTorque = torqueT;
 			}
-			#endregion
-
-			#region BrakeSystem and Reverse Actuator
-			
+		
 			//Brake SYSTEM And Reverse Actuator
 			if(!reverseGear){
 				if(Input.GetAxis("Vertical") < 0){
@@ -350,11 +336,10 @@ public class Vehicle : MonoBehaviour
 						}
 			}
 
-			#endregion
 
 			
 
-			#region WheelShapeUpdater 
+			
 			//Updates Wheel Shape looks while moving
 			if (wheelMesh) 
 			{
@@ -368,7 +353,7 @@ public class Vehicle : MonoBehaviour
 				shapeTransform.rotation = q;
  
 			}
-			#endregion
+			
 
 			 
 			discoEsq.transform.localRotation = Quaternion.Euler(0f, angulo, 0f);
@@ -376,7 +361,7 @@ public class Vehicle : MonoBehaviour
 			// // disco.transform.localPosition = new Vector3 (transform.localPosition.x , transform.localPosition.y, transform.localPosition.z); 
 
 		}
-		#endregion
+		
 
 	}
  
