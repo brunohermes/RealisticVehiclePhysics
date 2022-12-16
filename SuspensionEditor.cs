@@ -14,10 +14,9 @@ public class SuspensionEditor : Editor
    Suspension suspensionScript = (Suspension)target;
 
    EditorGUIUtility.LookLikeControls(300,50);
-
    GUI.DrawTexture(new Rect(10, 0, 350, 30), banner, ScaleMode.StretchToFill, false, 10.0f);
-   GUILayout.Space(30);
-   
+   GUILayout.Space(40);
+
    EditorGUILayout.FloatField("Natural Frequency: ", suspensionScript.naturalFrequency);
    GUILayout.Space(5);
    EditorGUILayout.FloatField("Damping Ratio: ", suspensionScript.dampingRatio);
