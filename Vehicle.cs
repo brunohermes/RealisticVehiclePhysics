@@ -35,7 +35,6 @@ public class Vehicle : MonoBehaviour
 	public TextMeshProUGUI rpmUi;
 	public Slider speedometerUi;
  
- 
 	//Particle System for trail and braking
 	public ParticleSystem[] handbrakeParticles;
 	public ParticleSystem[] movementParticles;
@@ -51,8 +50,7 @@ public class Vehicle : MonoBehaviour
 	private float secondGear = 1.36f;
 	private float thirdGear = 1.45f;
 	private float fourthGear = 1.56f;
- 
-	  
+   
 	public Renderer []brakeLamps;
 	public Renderer []headlamps;
 	public Renderer []reverselamps;
@@ -61,14 +59,11 @@ public class Vehicle : MonoBehaviour
 	 
 	public GameObject headlightsLights;
  
-
-	public Material blinkerOn, blinkerOff;
 	public Material reverseOn, reverseOff;
 	public Material brakeLightOn, brakeLightOff;
 	public Material headlightOn, headlightOff; //Headlights On/Off Material Slot	
 	public bool headlights;	//Headlights Toggler
  
-	
 	//Brake Disks
 
 	public GameObject discoEsq, discoDir;
@@ -78,13 +73,8 @@ public class Vehicle : MonoBehaviour
 
 	public bool vlights, spdmtr, vaudio, tctrl, impctsys;
 
-
-
  
-		
-
-
-	//Sistema de detecção de impacto inferior
+	//Ground impact detection system
 	private void OnTriggerEnter(Collider groundBoundaries){
 		if(impctsys){
 			if(groundBoundaries.gameObject.CompareTag("Level")){
@@ -107,12 +97,9 @@ public class Vehicle : MonoBehaviour
 	public void Start()
 	{
 		
-
-		
-		// groundImpactParticles
+ 		// groundImpactParticles
 		// groundBoundaries
-		
-
+ 
 		//Wheel creation
 		wheels = GetComponentsInChildren<WheelCollider>();
 		
