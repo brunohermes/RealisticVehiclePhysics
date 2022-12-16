@@ -71,14 +71,6 @@ public class Vehicle : MonoBehaviour
 
 	
  
-	//Ground impact detection system
-	private void OnTriggerEnter(Collider groundBoundaries){
-		if(impctsys){
-			if(groundBoundaries.gameObject.CompareTag("Level")){
-				groundImpactParticles.Play();
-			}
-		}
-	}
  
 	void Awake(){
 		//DEFAULT OPTIONS
@@ -93,6 +85,15 @@ public class Vehicle : MonoBehaviour
 		audioSource.loop = true;	
 	}
 
+	//Ground impact detection system
+	private void OnTriggerEnter(Collider groundBoundaries){
+		if(impctsys){
+			if(groundBoundaries.gameObject.CompareTag("Level")){
+				groundImpactParticles.Play();
+				shiftAudioS.Play();
+			}
+		}
+	}
 	
 	public void Start()
 	{
