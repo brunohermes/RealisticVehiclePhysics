@@ -17,9 +17,7 @@ public class SuspensionEditor : Editor
 
    GUI.DrawTexture(new Rect(10, 0, 350, 30), banner, ScaleMode.StretchToFill, false, 10.0f);
    GUILayout.Space(30);
-   EditorGUILayout.HelpBox("Settings for Spring Stiffness.", MessageType.Info);
-   GUILayout.Space(25);
-    
+   
    EditorGUILayout.FloatField("Natural Frequency: ", suspensionScript.naturalFrequency);
    GUILayout.Space(5);
    EditorGUILayout.FloatField("Damping Ratio: ", suspensionScript.dampingRatio);
