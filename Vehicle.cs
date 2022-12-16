@@ -19,8 +19,6 @@ public class Vehicle : MonoBehaviour
  
 	public float maxSpeed = 100;
 	public float maxTorque = 750;
-	public int gearsNo;
-	public float []gearBox;
  
 	public GameObject wheelMesh;
 	public GameObject tractionController;
@@ -45,11 +43,9 @@ public class Vehicle : MonoBehaviour
 	public float pitchVal = 1f;
 	public AudioClip engSound;
 	private AudioSource audioSource;
-	private float idleGear = 1f;
-	private float firstGear = 1.18f;
-	private float secondGear = 1.36f;
-	private float thirdGear = 1.45f;
-	private float fourthGear = 1.56f;
+	private AudioSource shiftAudioS;
+	public AudioClip shiftSound;
+	private float pitchval;
    
 	public Renderer []brakeLamps;
 	public Renderer []headlamps;
@@ -63,7 +59,7 @@ public class Vehicle : MonoBehaviour
 	public Material brakeLightOn, brakeLightOff;
 	public Material headlightOn, headlightOff; //Headlights On/Off Material Slot	
 	public bool headlights;	//Headlights Toggler
- 
+	public GameObject exhaust;
 	//Brake Disks
 
 	public GameObject discoEsq, discoDir;
@@ -73,6 +69,7 @@ public class Vehicle : MonoBehaviour
 
 	public bool vlights, spdmtr, vaudio, tctrl, impctsys;
 
+	
  
 	//Ground impact detection system
 	private void OnTriggerEnter(Collider groundBoundaries){
@@ -83,15 +80,18 @@ public class Vehicle : MonoBehaviour
 		}
 	}
  
-
-	#region Awake
 	void Awake(){
+		//DEFAULT OPTIONS
+
+		impctsys = true; // Ground impact system, shows sparks when the player hits the ground too hard or scraches the vehicle.
+	
+		shiftAudioS = exhaust.GetComponent<AudioSource>();
+		shiftAudioS.clip = shiftSound;
+	
 		audioSource = GetComponent<AudioSource>();
 		audioSource.clip = engSound;
 		audioSource.loop = true;	
 	}
-	#endregion
-
 
 	
 	public void Start()
@@ -125,6 +125,8 @@ public class Vehicle : MonoBehaviour
 	
 	public void Update()
 	{
+
+
 
 		//4x4
 		if(Input.GetKeyDown(KeyCode.G)){
@@ -237,6 +239,7 @@ public class Vehicle : MonoBehaviour
 
 				speedometerUi.value = speedKh;
 
+
 				//Particles
 				if(speedKh > 3){
 					for(int i = 0; i < movementParticles.Length; i++){
@@ -247,60 +250,7 @@ public class Vehicle : MonoBehaviour
 					movementParticles[i].Stop();
 					}
 				}
-
-				//Transmission system
-				for(int i = 0;speedKh > gearBox[i] && i < gearsNo; i++){
-					if(speedKh > 0){
-						switch(i){
-						case 0:
-						// print("1st gear");
-						 
-						pitchVal = firstGear;
-						audioSource.pitch = pitchVal;
-
-						break;
-						case 1:
-						// print("2nd gear");
-						 
-						pitchVal = secondGear;
-						audioSource.pitch = pitchVal;
-
-						break;
-
-						case 2:
-						// print("3rd gear");
-						 
-						pitchVal = thirdGear;
-						audioSource.pitch = pitchVal;
-
-						break;
-
-						case 3:
-						// print("4th gear");
-						 
-						pitchVal = fourthGear;
-						audioSource.pitch = pitchVal;
-
-						break;
-
-						case 4:
-						// print("5th gear");
-						 
-						
-						break;
-						default: 
-							// print("Neutral");
-							 
-							pitchVal = idleGear;
-							audioSource.pitch = pitchVal;
-						break;
-					}
-						
-					}else{
-						pitchVal = idleGear;
-						audioSource.pitch = pitchVal;
-					}
-				}
+  
 
 			//Sets the max speed
 				if(speedKh < maxSpeed){
@@ -310,7 +260,7 @@ public class Vehicle : MonoBehaviour
 				}
 				wheel.motorTorque = torqueT;
 			}
-		
+ 
 			//Brake SYSTEM And Reverse Actuator
 			if(!reverseGear){
 				if(Input.GetAxis("Vertical") < 0){
