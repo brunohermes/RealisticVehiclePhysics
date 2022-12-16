@@ -91,15 +91,6 @@ public class Vehicle : MonoBehaviour
 	public Renderer []leftBlinkerLamps;
 	public Renderer []rightBlinkerLamps;
 	 
-
-
-	private float bDuration, bCount;
-	private bool leftBlinkerOn;
-	private bool rightBlinkerOn;
-
-	private IEnumerator coroutineBL;
-	private IEnumerator coroutineBR;
-
 	public GameObject headlightsLights;
 	/** Vehicle Lights **/
 	[Space(5)]
@@ -435,62 +426,6 @@ public class Vehicle : MonoBehaviour
 		}
 		#endregion
 
-
-		//Blinkers
-		//Left
-		if(Input.GetKeyDown("[")){
-			 leftBlinkerOn = !leftBlinkerOn;
-		}
- 
-		//right
-		if(Input.GetKeyDown("]")){
-			  rightBlinkerOn = !rightBlinkerOn;
-		}
-
-		if(leftBlinkerOn){
-			coroutineBL = leftBlinkerOnCoroutine(1.2f);
-			StartCoroutine(coroutineBL);
-		}else{
-			
-		}
-
-
 	}
-
-	IEnumerator leftBlinkerOnCoroutine(float waitTime){
-		leftBlinkerOnState();
-		yield return new WaitForSeconds(1f);
-	 
-	}
-	 
-
- 
-
-	private void leftBlinkerOnState(){
-			for(int i = 0; i < leftBlinkerLamps.Length; i++){
-					leftBlinkerLamps[i].material = blinkerOn;
-					}
-	}
-
-	private void rightBlinkerOnState(){
-			for(int i = 0; i < rightBlinkerLamps.Length; i++){
-				rightBlinkerLamps[i].material = blinkerOn;
-			}
-	}
-
-
-	private void leftBlinkerOffState(){
-
-		for(int i = 0; i < leftBlinkerLamps.Length; i++){
-				leftBlinkerLamps[i].material = blinkerOff;
-				}
-	}
-	private void rightBlinkerOffState(){
-
-		for(int i = 0; i < rightBlinkerLamps.Length; i++){
-				rightBlinkerLamps[i].material = blinkerOff;
-			}
-	}
-
  
 }
