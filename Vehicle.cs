@@ -9,28 +9,19 @@ using TMPro;
 public class Vehicle : MonoBehaviour
 {
     private WheelCollider[] wheels;
-    
-    #region Engine Mechanics
-	 
-	[Header("Maneuverability and Brakes")]
-	[Space(15)]
+ 
 	public float steeringAngle = 30;
 	public float brakeTorque = 1200;
 	public GameObject handbrakeDection;
 	private bool handBrakeActive;
-	[Space(15)]
+ 
 	//Engine Performance Setup
-
-	[Header("\u03C4" + "              Engine - Performance")]
-	[Space(15)]
+ 
 	public float maxSpeed = 100;
 	public float maxTorque = 750;
 	public int gearsNo;
 	public float []gearBox;
-	[Space(15)]
-
-	[Header("\u25EF" + "              Wheels")]
-	[Space(15)]
+ 
 	public GameObject wheelMesh;
 	public GameObject tractionController;
 	//Rpm and Km/h System
@@ -38,37 +29,20 @@ public class Vehicle : MonoBehaviour
 	private int speedKh;
 	//Transmission System
 	private bool reverseGear;
-	[Space(15)]
-	#endregion
-
-	#region User interface
-	[Header("\u20E3" + "              User Interface")]
-	[Space(15)]
+ 
 	//User interface
 	public TextMeshProUGUI kphUi;
 	public TextMeshProUGUI rpmUi;
 	public Slider speedometerUi;
-	[Space(10)]
-	#endregion
-
-	#region Effects
-	[Header("\u2749" + "              Particles")]
-	[Space(5)]
-	[Space(15)]
+ 
+ 
 	//Particle System for trail and braking
 	public ParticleSystem[] handbrakeParticles;
 	public ParticleSystem[] movementParticles;
 
 	public ParticleSystem groundImpactParticles;
 	public GameObject groundBoundaries;
-
-	[Space(15)]
-	#endregion
-	
-	#region Audio
-	[Header("\u266B" + "               Audio")]
-	[Space(5)]
-	[Space(15)]
+ 
 	public float pitchVal = 1f;
 	public AudioClip engSound;
 	private AudioSource audioSource;
@@ -78,13 +52,7 @@ public class Vehicle : MonoBehaviour
 	private float thirdGear = 1.45f;
 	private float fourthGear = 1.56f;
  
-	[Space(15)]
-	#endregion
-
-	#region Electric
-	[Header("\u2600" + "              Electric")]
-	[Space(15)]
-	
+	  
 	public Renderer []brakeLamps;
 	public Renderer []headlamps;
 	public Renderer []reverselamps;
@@ -92,44 +60,38 @@ public class Vehicle : MonoBehaviour
 	public Renderer []rightBlinkerLamps;
 	 
 	public GameObject headlightsLights;
-	/** Vehicle Lights **/
-	[Space(5)]
-	[Header("Material")]
-	[Space(5)]
+ 
+
 	public Material blinkerOn, blinkerOff;
 	public Material reverseOn, reverseOff;
 	public Material brakeLightOn, brakeLightOff;
 	public Material headlightOn, headlightOff; //Headlights On/Off Material Slot	
 	public bool headlights;	//Headlights Toggler
-	#endregion
-
-	//TESTANDO SCRIPTS E IDEIAS
+ 
+	
+	//Brake Disks
 
 	public GameObject discoEsq, discoDir;
 	public float angulo;
  
+	//OPTIONS
+
+	public bool vlights, spdmtr, vaudio, tctrl, impctsys;
 
 
 
-
-
-
-	// AQUI ACABAM OS TESTES KKKK
  
-
-
 		
-		// groundImpactParticles
-		// groundBoundaries
-		
+
 
 	//Sistema de detecção de impacto inferior
 	private void OnTriggerEnter(Collider groundBoundaries){
-		if(groundBoundaries.gameObject.CompareTag("Level")){
-			groundImpactParticles.Play();
+		if(impctsys){
+			if(groundBoundaries.gameObject.CompareTag("Level")){
+				groundImpactParticles.Play();
+			}
 		}
 	}
-
  
 
 	#region Awake
@@ -185,8 +147,15 @@ public class Vehicle : MonoBehaviour
 		
 		
 
-	  
-		
+		//4x4
+		if(Input.GetKeyDown(KeyCode.G)){
+			if(!tractionController.activeSelf){
+				tractionController.SetActive(true);
+			}else if(tractionController.activeSelf){
+				tractionController.SetActive(false);
+			}
+		}
+ 
 		//Headlights
 		if(Input.GetKeyDown(KeyCode.L) && headlights == false){
 			for(int i = 0; i < headlamps.Length; i++){
@@ -246,10 +215,6 @@ public class Vehicle : MonoBehaviour
 				wheel.steerAngle = angle;
 				// print(wheel.steerAngle );
 				angulo = angle;
-				
- 
- 
-				
 				
 
 			if(tractionController.activeSelf){
