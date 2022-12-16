@@ -177,8 +177,7 @@ public class Vehicle : MonoBehaviour
 		
 		foreach (WheelCollider wheel in wheels)
 		{
-			
-
+ 
 			if(handbrake){
 				wheel.brakeTorque = 2750;
 			}else{
@@ -199,9 +198,7 @@ public class Vehicle : MonoBehaviour
 				wheel.motorTorque = 0;
 			}
 			}
-				
-
-			
+ 
 			if (wheel.transform.localPosition.z < 0){
 				
 				//RPM TO KMPH
@@ -335,11 +332,7 @@ public class Vehicle : MonoBehaviour
 							speedKh = 30;
 						}
 			}
-
-
-			
-
-			
+ 
 			//Updates Wheel Shape looks while moving
 			if (wheelMesh) 
 			{
@@ -353,9 +346,7 @@ public class Vehicle : MonoBehaviour
 				shapeTransform.rotation = q;
  
 			}
-			
-
-			 
+ 
 			discoEsq.transform.localRotation = Quaternion.Euler(0f, angulo, 0f);
 			discoDir.transform.localRotation = Quaternion.Euler(0f, angulo, 0f);
 			// // disco.transform.localPosition = new Vector3 (transform.localPosition.x , transform.localPosition.y, transform.localPosition.z); 
